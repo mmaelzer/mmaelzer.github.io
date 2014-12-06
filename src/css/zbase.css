@@ -27,3 +27,9 @@ pre {
 .align-right {
     text-align: right;
 }
+
+p > code {
+    font-size: 18px;
+    background: #ddd;
+    padding: 2px 2px;
+}

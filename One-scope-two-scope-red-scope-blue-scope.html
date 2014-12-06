@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>index</title>
+    <title>One scope two scope red scope blue scope</title>
     <meta charset="utf-8">
     <meta description="Wordful words about things only a few people find interesting.">
     <meta name="viewport" content="width=device-width">
@@ -16,32 +16,89 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-    <h2>One scope two scope red scope blue scope</h2>
+    <h1>One scope two scope red scope blue scope</h1>
 
-<p><em>December 6, 2014</em></p>
+<blockquote>
+<p>From there to here,<br />
+from here to there,<br />
+Funny things<br />
+Are everywhere.</p>
+</blockquote>
 
 <p>Poke around the intertube, and you&rsquo;ll find an endless stream of questions around JavaScript scoping. There&rsquo;s no need for the confusion, scoping in JavaScript is super duper easy if you put aside whatever scoping you&rsquo;re accustomed to.</p>
 
-<p><a href="One-scope-two-scope-red-scope-blue-scope.html">Read more »</a></p>
+<p>Here&rsquo;s the trick, by default, <code>this</code> refers to the <code>object</code> that&rsquo;s calling the function. <code>this</code> has nothing to do with <code>if</code> blocks or <code>for</code> loops or <code>switch</code> statements. The keyword <code>this</code> is always scoped by function <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/with">except for one case that you should never ever even consider</a>.</p>
 
-<h2>A love letter to reduce</h2>
+<h2>One scope</h2>
 
-<p><em>Novemeber 24, 2014</em></p>
+<pre><code class="language-javascript">function scope() {
+  console.log(this.name);
+}
 
-<p>Oh <code>reduce</code>, how you are taken for granted, shoved into a corner, ignored for your more popular siblings <code>map</code> and <code>filter</code>.</p>
+scope();
+//&gt; undefined
 
-<p><a href="A-love-letter-to-reduce.html">Read more »</a></p>
+this.name = &quot;one scope&quot;;
+scope();
+//&gt; one scope
+</code></pre>
 
-<h2>If you wish to make a webpage&hellip;</h2>
+<h2>Two scope</h2>
 
-<p><em>November 23, 2014</em></p>
+<pre><code class="language-javascript">function scope() {
+  console.log(this.name);
+}
 
-<blockquote>
-<p>If you wish to make a webpage, you must first boil the ocean.<br />
- -Carl Sagan</p>
-</blockquote>
+var two = {
+  name: &quot;two scope&quot;
+};
 
-<p><a href="If-you-wish-to-make-a-webpage.html">Read more »</a></p>
+scope();
+//&gt; undefined
+
+two.scope = scope;
+two.scope();
+//&gt; two scope
+</code></pre>
+
+<h2>Red scope</h2>
+
+<pre><code class="language-javascript">function scope() {
+  console.log(this.name);
+}
+
+function Red() {
+  this.name = 'red scope';
+}
+
+var red = new Red();
+red.scope = scope;
+red.scope();
+//&gt; red scope
+</code></pre>
+
+<h2>Blue scope</h2>
+
+<pre><code class="language-javascript">function scope() {
+  console.log(this.name);
+}
+
+function Blue() {
+  this.name = 'blue scope';
+}
+
+Blue.prototype.scope = scope;
+
+var blue = new Blue();
+blue.scope();
+//&gt; blue scope
+
+blue.name = &quot;true blue scope&quot;;
+blue.scope();
+//&gt; true blue scope
+</code></pre>
+
+<p>In the next post, I&rsquo;ll talk about overriding the default scoping behavior with <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">Function.prototype.call</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">Function.prototype.apply</a>.</p>
 
     </div>
   </div>
