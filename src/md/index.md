@@ -1,3 +1,12 @@
+One scope two scope red scope blue scope (part 2)
+------------------------------------------------
+_April 18, 2015_
+
+Here we are again, talking about JavaScript scoping. [Last time](One-scope-two-scope-red-scope-blue-scope.html) we spoke of how `this` works: `this` refers to the object that's calling the function...  
+  
+[Read more »](One-scope-two-scope-red-scope-blue-scope-\(part-2\).html)  
+  
+
 One scope two scope red scope blue scope
 -----------------------
 _December 6, 2014_  
@@ -6,7 +15,7 @@ Poke around the intertube, and you'll find an endless stream of questions around
 
 [Read more »](One-scope-two-scope-red-scope-blue-scope.html)  
   
-
+  
 A love letter to reduce
 -----------------------
 _Novemeber 24, 2014_  
@@ -15,7 +24,7 @@ Oh `reduce`, how you are taken for granted, shoved into a corner, ignored for yo
 
 [Read more »](A-love-letter-to-reduce.html)  
   
-
+  
 If you wish to make a webpage...
 --------------------------------
 _November 23, 2014_  

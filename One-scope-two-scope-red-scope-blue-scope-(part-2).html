@@ -1,0 +1,133 @@
+<html>
+<head>
+    <title>One scope two scope red scope blue scope (part 2)</title>
+    <meta charset="utf-8">
+    <meta description="Wordful words about things only a few people find interesting.">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body style="font-family:'Open Sans'" class="container-fluid">
+  <div class="row heading">
+    <div class="brand col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+      <a href="http://mikemaelzer.com">mikemaelzer</a>
+      /
+      <a href="http://words.mikemaelzer.com">words</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+    <h1>One scope two scope red scope blue scope (part 2)</h1>
+
+<blockquote>
+<p>Think left and think right<br />
+and think low and think high.<br />
+Oh, the thinks you can think up<br />
+if only you try!</p>
+</blockquote>
+
+<p>Here we are again, talking about JavaScript scoping. <a href="One-scope-two-scope-red-scope-blue-scope.html">Last time</a> we spoke of how <code>this</code> works: <code>this</code> refers to the object that&rsquo;s calling the function, like so:</p>
+
+<pre><code class="language-javascript">var dog = {
+  noise: 'bark',
+  speak: function() {
+    console.log(this.noise);
+  }
+};
+
+dog.speak();
+// bark
+</code></pre>
+
+<h2>Function.prototype.call</h2>
+
+<p>Let&rsquo;s look at how we can override the default behavior of <code>this</code> by using the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">call</a> method on a <code>function</code>.</p>
+
+<pre><code class="language-javascript">var dog = {
+  noise: 'bark',
+  speak: function() {
+    console.log(this.noise);
+  }
+};
+
+var cat = {
+  noise: 'meow'
+};
+
+dog.speak.call(cat);
+// meow
+</code></pre>
+
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">call</a> method also allows us to provide arguments to a function being called.</p>
+
+<pre><code class="language-javascript">var dog = {
+  name: 'dog',
+  eat: function(food) {
+    console.log('the', this.name, 'eats', food);
+  }
+};
+
+var cat = {
+  name: 'cat'
+};
+
+dog.eat('treats');
+// the dog eats treats
+
+dog.eat.call(cat, 'fish');
+// the cat eats fish
+</code></pre>
+
+<h2>Function.prototype.apply</h2>
+
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">apply</a> method is just like the <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">call</a> method <em>except</em> it takes an array of arguments instead of a series of arguments. Let me illustrate.</p>
+
+<pre><code class="language-javascript">var sum = function(num1, num2, num3) {
+  return this.startingValue + num1 + num2 + num3;
+};
+
+var callValue = sum.call({ startingValue: 0 }, 1, 2, 3);
+console.log(callValue);
+// 6
+
+var applyValue = sum.apply({ startingValue: 0 }, [1, 2, 3]);
+console.log(applyValue);
+// 6
+</code></pre>
+
+<p>That&rsquo;s it. The <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call">call</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply">apply</a> methods are super useful ways of overriding the default behavior of <code>this</code>.</p>
+
+    </div>
+  </div>
+  <footer>
+    <div class="row">
+      <div class="col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <hr>
+        <img src="static/297px-WTFPL.png" 
+             alt="Do What the Fuck You Want to Public License"
+             style="height:20px;width:auto;">
+        <a href="http://en.wikipedia.org/wiki/WTFPL">WTFPL</a>
+        •
+        <a href="https://github.com/mmaelzer/mmaelzer.github.io">source</a>
+        •
+        Mike Maelzer
+      </div>
+    </div>
+  </footer>
+  
+  <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-27467248-1']);
+      _gaq.push(['_setDomainName', 'mikemaelzer.com']);
+      _gaq.push(['_trackPageview']);
+      (function() {
+        var ga = document.createElement('script'); 
+        ga.type = 'text/javascript'; 
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; 
+        s.parentNode.insertBefore(ga, s);
+      })();
+  </script>
+  <script src="static/bundle.js"></script>
+</body>
+</html>
